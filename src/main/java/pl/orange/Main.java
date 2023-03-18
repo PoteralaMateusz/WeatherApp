@@ -6,7 +6,11 @@ public class Main {
 
         WeatherApiReader accuWeather = new WeatherApiReader("http://dataservice.accuweather.com/forecasts/v1/daily/1day/266375?apikey=mn4i7Pi5bymsiuqfhiBbXL2BCJbl43MC&language=pl");
 
-        System.out.println(accuWeather.response());
+        //System.out.println(accuWeather.response());
+
+        WeatherDataDeserialization accuWeatherDataDeserialization = new WeatherDataDeserialization(accuWeather);
+
+        accuWeatherDataDeserialization.getDataCategory().forEach(System.out::println);
 
     }
 }
