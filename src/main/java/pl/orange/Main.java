@@ -15,10 +15,7 @@ public class Main {
         WeatherDataDeserialization accuWeatherDataDeserialization = new WeatherDataDeserialization(accuWeather);
         WeatherDataDeserialization.getDataFromCategory(accuWeatherDataDeserialization.getApiData(),"Headline").entrySet()
                 .forEach(v-> System.out.println(v.getKey()));
-
-    }
-
-    private void getTemperatureData(){
+        System.out.println("===");
 
     }
 }
