@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -29,6 +30,22 @@ public class WeatherDataDeserialization {
                 .collect(Collectors.toList());
     }
 
+    public Map<String, Object> getApiData() {
+        return apiData;
+    }
+
+    public static Map<String, Object> getDataFromCategory(Map<String, Object> data , String dataCategory) {
+
+        if (data.containsKey(dataCategory)){
+            return (LinkedHashMap<String,Object>) data.get(dataCategory);
+
+        }else {
+            LOGGER.warn("Category dont exixt");
+            return new HashMap<>();
+        }
+
+
+    }
 
     private void getData() {
         mapper = new ObjectMapper();
