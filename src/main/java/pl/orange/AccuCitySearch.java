@@ -16,8 +16,12 @@ public class AccuCitySearch {
     public AccuCitySearch(String city) {
         this.city = city;
         this.apiData = new WeatherApiReader("http://dataservice.accuweather.com/locations/v1/cities/PL/search?apikey="
-                + apiKey2 + "&q=" + city);
+                + apiKey1 + "&q=" + city);
         cityExisting();
+    }
+
+    public String cityKey(){
+        return cityKey;
     }
 
     private void cityExisting(){

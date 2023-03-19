@@ -13,9 +13,11 @@ public class Main {
         //System.out.println(acuuWeather1Day);
         //System.out.println("===================================");
 
-        AccuCitySearch accuCitySearch1 = new AccuCitySearch("Działdowo");
+        AccuCitySearch newCity = new AccuCitySearch("Warszawa");
+        System.out.println(newCity.cityKey());
+        AcuuWeather1Day acuuWeather1Day = new AcuuWeather1Day(Integer.valueOf(newCity.cityKey()));
 
-
+        System.out.println(acuuWeather1Day);
 
     }
 }
