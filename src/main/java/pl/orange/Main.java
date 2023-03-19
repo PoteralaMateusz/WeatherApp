@@ -13,7 +13,7 @@ public class Main {
         //System.out.println(acuuWeather1Day);
         //System.out.println("===================================");
 
-        AccuCitySearch newCity = new AccuCitySearch("Warszawa");
+        AccuCitySearch newCity = new AccuCitySearch("Jajjjj");
         AcuuWeather1Day acuuWeather1Day = new AcuuWeather1Day(Integer.valueOf(newCity.cityKey()));
 
         System.out.println(acuuWeather1Day);

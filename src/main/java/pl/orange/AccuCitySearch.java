@@ -2,7 +2,10 @@ package pl.orange;
 
 import org.apache.log4j.Logger;
 
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 public class AccuCitySearch {
 
@@ -18,7 +21,7 @@ public class AccuCitySearch {
     public AccuCitySearch(String city) {
         this.city = city;
         this.apiData = new WeatherApiReader("http://dataservice.accuweather.com/locations/v1/cities/PL/search?apikey="
-                + apiKey1 + "&q=" + city);
+                + apiKey1 + "&q=" + URLEncoder.encode(city, StandardCharsets.UTF_8));
         cityExisting();
     }
 
@@ -32,6 +35,7 @@ public class AccuCitySearch {
             getCityKey();
         }else
         {
+            cityKey = "0";
             LOGGER.warn("City: " + city + " don't exist in weather API");
         }
     }
@@ -43,9 +47,7 @@ public class AccuCitySearch {
             int keyEndIndex = keyStartIndex + (data.substring(keyStartIndex)).indexOf(",") - 1;
             cityKey = data.substring(keyStartIndex, keyEndIndex);
         }
-        else {
-            cityKey = "0";
-        }
+
 
     }
 }
