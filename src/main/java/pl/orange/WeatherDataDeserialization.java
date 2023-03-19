@@ -16,7 +16,7 @@ public class WeatherDataDeserialization {
     private final static Logger LOGGER = Logger.getLogger(WeatherDataDeserialization.class);
 
     private WeatherApiReader apiReader;
-    private Map<String, Object> apiData;
+    public Map<String, Object> apiData;
     private ObjectMapper mapper = new ObjectMapper();
 
     public WeatherDataDeserialization(WeatherApiReader apiReader) {
@@ -24,33 +24,14 @@ public class WeatherDataDeserialization {
         getData();
     }
 
-    public List<String> getDataCategory() {
-        return apiData.entrySet().stream()
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
-    }
-
     public Map<String, Object> getApiData() {
         return apiData;
-    }
-
-    public static Map<String, Object> getDataFromCategory(Map<String, Object> data , String dataCategory) {
-
-        if (data.containsKey(dataCategory)){
-            return (LinkedHashMap<String,Object>) data.get(dataCategory);
-
-        }else {
-            LOGGER.warn("Category dont exixt");
-            return new HashMap<>();
-        }
-
-
     }
 
     private void getData() {
         mapper = new ObjectMapper();
         try {
-            apiData = mapper.readValue(apiReader.response().toString(), new TypeReference<Map<String, Object>>() {
+            apiData = mapper.readValue(apiReader.response().toString(), new TypeReference<>() {
             });
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);

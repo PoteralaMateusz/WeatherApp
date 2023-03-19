@@ -8,14 +8,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        WeatherApiReader accuWeather = new WeatherApiReader("http://dataservice.accuweather.com/forecasts/v1/daily/1day/266375?apikey=mn4i7Pi5bymsiuqfhiBbXL2BCJbl43MC&language=pl&details=true");
+        AcuuWeather1Day acuuWeather1Day = new AcuuWeather1Day(266375);
+        System.out.println("===================================");
 
-        //System.out.println(accuWeather.response());
+        System.out.println("===================================");
 
-        WeatherDataDeserialization accuWeatherDataDeserialization = new WeatherDataDeserialization(accuWeather);
-        WeatherDataDeserialization.getDataFromCategory(accuWeatherDataDeserialization.getApiData(),"Headline").entrySet()
-                .forEach(v-> System.out.println(v.getKey()));
-        System.out.println("===");
 
     }
 }
