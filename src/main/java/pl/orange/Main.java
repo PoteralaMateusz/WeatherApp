@@ -13,8 +13,8 @@ public class Main {
         //System.out.println(acuuWeather1Day);
         //System.out.println("===================================");
 
-        AccuCitySearch accuCitySearch1 = new AccuCitySearch("Nidzi");
-        AccuCitySearch accuCitySearch2 = new AccuCitySearch("Nidzica");
+        AccuCitySearch accuCitySearch1 = new AccuCitySearch("Działdowo");
+
 
 
     }
