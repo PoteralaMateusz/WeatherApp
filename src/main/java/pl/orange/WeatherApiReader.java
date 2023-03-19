@@ -13,16 +13,22 @@ public class WeatherApiReader {
     private final static Logger LOGGER = Logger.getLogger(WeatherApiReader.class);
 
     public final String GET_URL;
-    private StringBuffer response = new StringBuffer();
+    private StringBuffer responseData = new StringBuffer();
+    private int responseCode;
 
     public WeatherApiReader(String GET_URL){
         this.GET_URL = GET_URL;
         readDataToString();
     }
 
-    public StringBuffer response() {
-        return response;
+    public StringBuffer responseData() {
+        return responseData;
     }
+
+    public int responseCode(){
+        return responseCode;
+    }
+
 
     private void readDataToString() {
 
@@ -32,17 +38,17 @@ public class WeatherApiReader {
             HttpURLConnection apiConnection = (HttpURLConnection) apiURL.openConnection();
             apiConnection.setRequestMethod("GET");
 
-            if (apiConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+            if ((responseCode = apiConnection.getResponseCode()) == HttpURLConnection.HTTP_OK) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(apiConnection.getInputStream()));
                 String inputLine;
 
                 while ((inputLine = reader.readLine()) != null) {
-                    response.append(inputLine);
+                    responseData.append(inputLine);
                 }
                 reader.close();
             } else {
                 LOGGER.error("API CONNECTION ERROR:" + apiConnection.getResponseCode());
-                response = new StringBuffer();
+                responseData = new StringBuffer();
             }
 
         } catch (IOException e) {

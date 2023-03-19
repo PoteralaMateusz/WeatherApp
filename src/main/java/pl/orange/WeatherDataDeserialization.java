@@ -5,11 +5,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.log4j.Logger;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.net.HttpURLConnection;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class WeatherDataDeserialization {
 
@@ -21,7 +18,9 @@ public class WeatherDataDeserialization {
 
     public WeatherDataDeserialization(WeatherApiReader apiReader) {
         this.apiReader = apiReader;
-        getData();
+        if (apiReader.responseCode() == HttpURLConnection.HTTP_OK) {
+            getData();
+        }
     }
 
     public Map<String, Object> getApiData() {
@@ -31,7 +30,7 @@ public class WeatherDataDeserialization {
     private void getData() {
         mapper = new ObjectMapper();
         try {
-            apiData = mapper.readValue(apiReader.response().toString(), new TypeReference<>() {
+            apiData = mapper.readValue(apiReader.responseData().toString(), new TypeReference<>() {
             });
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
