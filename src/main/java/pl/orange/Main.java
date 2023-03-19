@@ -8,10 +8,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        AcuuWeather1Day acuuWeather1Day = new AcuuWeather1Day(266375);
-        System.out.println("===================================");
-        System.out.println(acuuWeather1Day);
-        System.out.println("===================================");
+        //AcuuWeather1Day acuuWeather1Day = new AcuuWeather1Day(266375);
+        //System.out.println("===================================");
+        //System.out.println(acuuWeather1Day);
+        //System.out.println("===================================");
+
+        AccuCitySearch accuCitySearch1 = new AccuCitySearch("Nidzi");
+        AccuCitySearch accuCitySearch2 = new AccuCitySearch("Nidzica");
 
 
     }
