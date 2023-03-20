@@ -18,9 +18,9 @@ public class AccuCitySearch {
     private String cityKey;
 
     public AccuCitySearch(String city) {
-        this.city = city;
+        this.city = URLEncoder.encode(city, StandardCharsets.UTF_8);
         this.apiData = new WeatherApiReader("http://dataservice.accuweather.com/locations/v1/cities/PL/search?apikey="
-                + apiKey1 + "&q=" + URLEncoder.encode(city, StandardCharsets.UTF_8));
+                + apiKey1 + "&q=" + this.city);
         cityExisting();
     }
 
