@@ -1,8 +1,7 @@
-package pl.orange;
+package pl.orange.weather;
 
 import org.apache.log4j.Logger;
 
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;

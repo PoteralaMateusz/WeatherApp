@@ -1,4 +1,4 @@
-package pl.orange;
+package pl.orange.weather;
 
 import org.apache.log4j.Logger;
 

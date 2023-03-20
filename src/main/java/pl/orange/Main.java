@@ -1,8 +1,7 @@
 package pl.orange;
 
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import pl.orange.weather.AccuCitySearch;
+import pl.orange.weather.AcuuWeather1Day;
 
 public class Main {
 
