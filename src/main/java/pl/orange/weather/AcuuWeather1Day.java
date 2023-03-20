@@ -50,12 +50,12 @@ public class AcuuWeather1Day {
     private void getWindData() {
         var forecast = ((ArrayList<?>) acuuWeatherData.getApiData().get("DailyForecasts")).get(0);
         var dayData = ((Map.Entry) ((LinkedHashMap) forecast).entrySet().toArray()[10]).getValue();
-        var dayWindData = ((Map.Entry) ((LinkedHashMap) dayData).entrySet().toArray()[10]).getValue();
+        var dayWindData = ((Map.Entry) ((LinkedHashMap) dayData).entrySet().toArray()[12]).getValue();
         windSpeedDay = (double) ((Map.Entry) ((LinkedHashMap) ((Map.Entry) ((LinkedHashMap) dayWindData).entrySet().toArray()[0]).getValue()).entrySet().toArray()[0]).getValue();
         windDirectionDay = ((Map.Entry) ((LinkedHashMap) ((Map.Entry) ((LinkedHashMap) dayWindData).entrySet().toArray()[1]).getValue()).entrySet().toArray()[1]).getValue().toString();
 
         var nightData = ((Map.Entry) ((LinkedHashMap) forecast).entrySet().toArray()[11]).getValue();
-        var nightWindData = ((Map.Entry) ((LinkedHashMap) dayData).entrySet().toArray()[11]).getValue();
+        var nightWindData = ((Map.Entry) ((LinkedHashMap) dayData).entrySet().toArray()[12]).getValue();
 
         windSpeedNight = (double) ((Map.Entry) ((LinkedHashMap) ((Map.Entry) ((LinkedHashMap) nightWindData).entrySet().toArray()[0]).getValue()).entrySet().toArray()[0]).getValue();
         windDirectionNight = ((Map.Entry) ((LinkedHashMap) ((Map.Entry) ((LinkedHashMap) nightWindData).entrySet().toArray()[1]).getValue()).entrySet().toArray()[1]).getValue().toString();
