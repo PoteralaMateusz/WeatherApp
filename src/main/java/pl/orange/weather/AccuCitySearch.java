@@ -16,6 +16,7 @@ public class AccuCitySearch {
     private final String apiKey2 = "mn4i7Pi5bymsiuqfhiBbXL2BCJbl43MC";
     private String cityName;
     private int cityKey;
+    public boolean cityExist;
 
     public AccuCitySearch(String city) {
         this.cityName = URLEncoder.encode(city, StandardCharsets.UTF_8);
@@ -35,9 +36,11 @@ public class AccuCitySearch {
     private void cityExisting(){
         if (apiData.responseData().compareTo(new StringBuffer("[]")) != 0 ){
             LOGGER.info("City: " + cityName + " exist in weather API");
+            cityExist = true;
             getCityKey();
         }else
         {
+            cityExist = false;
             cityKey = 0;
             LOGGER.warn("City: " + cityName + " don't exist in weather API");
         }

@@ -13,6 +13,7 @@ public class AcuuWeather1Day {
     private WeatherDataDeserialization acuuWeatherData;
     private final String apiKey1 = "dQHpG5soGU4z6IGMbSYdA7UQVA9JySmR";
     private final String apiKey2 = "mn4i7Pi5bymsiuqfhiBbXL2BCJbl43MC";
+    private final String cityName;
     private final int cityID;
     private double minimalTemperature;
     private double maximumTemperature;
@@ -21,15 +22,16 @@ public class AcuuWeather1Day {
     private double windSpeedNight;
     private String windDirectionNight;
 
-    public AcuuWeather1Day(int cityID) {
+    public AcuuWeather1Day(String cityName,int cityID) {
         this.cityID = cityID;
+        this.cityName = cityName;
         if (this.cityID != 0) {
             acuuWeatherData = new WeatherDataDeserialization(
                     new WeatherApiReader("http://dataservice.accuweather.com/forecasts/v1/daily/1day/"
                             + cityID + "?apikey= " + apiKey2 + "&language=pl&details=true&metric=true"));
             getTemperatureData();
             getWindData();
-        }else {
+        } else {
             LOGGER.warn("API CONNECTION ERROR OR CITY DON'T EXIST");
         }
 
@@ -65,11 +67,12 @@ public class AcuuWeather1Day {
     @Override
     public String toString() {
         return cityID != 0 ?
-                new StringBuilder("Aktualne dane pogodowe: \n")
-                .append("Temperatura minimalna " + minimalTemperature + " °C, maksymalna " + maximumTemperature + " °C. \n")
-                .append("Wiatr podczas dnia: " + windSpeedDay + " km/h, kierunek: " + windDirectionDay + ". \n")
-                .append("Wiatr w nocy: " + windSpeedNight + " km/h, kierunek: " + windDirectionNight + ". \n")
-                .toString() :
+                new StringBuilder("Aktualne dane pogodowe dla miasta" + cityName)
+                        .append(": \n")
+                        .append("Temperatura minimalna " + minimalTemperature + " °C, maksymalna " + maximumTemperature + " °C. \n")
+                        .append("Wiatr podczas dnia: " + windSpeedDay + " km/h, kierunek: " + windDirectionDay + ". \n")
+                        .append("Wiatr w nocy: " + windSpeedNight + " km/h, kierunek: " + windDirectionNight + ". \n")
+                        .toString() :
                 "Brak wczytanych danych";
     }
 }
