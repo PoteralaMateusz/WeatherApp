@@ -35,14 +35,14 @@ public class AccuCitySearch {
 
     private void cityExisting(){
         if (apiData.responseData().compareTo(new StringBuffer("[]")) != 0 ){
-            LOGGER.info("City: " + cityName + " exist in weather API");
+            LOGGER.info("City: " + URLEncoder.encode(cityName) + " exist in weather API");
             cityExist = true;
             getCityKey();
         }else
         {
             cityExist = false;
             cityKey = 0;
-            LOGGER.warn("City: " + cityName + " don't exist in weather API");
+            LOGGER.warn("City: " + URLEncoder.encode(cityName) + " don't exist in weather API");
         }
     }
 

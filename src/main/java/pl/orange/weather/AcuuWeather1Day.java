@@ -3,6 +3,7 @@ package pl.orange.weather;
 import org.apache.log4j.Logger;
 
 
+import java.net.URLDecoder;
 import java.util.*;
 
 
@@ -57,7 +58,7 @@ public class AcuuWeather1Day {
         windDirectionDay = ((Map.Entry) ((LinkedHashMap) ((Map.Entry) ((LinkedHashMap) dayWindData).entrySet().toArray()[1]).getValue()).entrySet().toArray()[1]).getValue().toString();
 
         var nightData = ((Map.Entry) ((LinkedHashMap) forecast).entrySet().toArray()[11]).getValue();
-        var nightWindData = ((Map.Entry) ((LinkedHashMap) dayData).entrySet().toArray()[12]).getValue();
+        var nightWindData = ((Map.Entry) ((LinkedHashMap) nightData).entrySet().toArray()[12]).getValue();
 
         windSpeedNight = (double) ((Map.Entry) ((LinkedHashMap) ((Map.Entry) ((LinkedHashMap) nightWindData).entrySet().toArray()[0]).getValue()).entrySet().toArray()[0]).getValue();
         windDirectionNight = ((Map.Entry) ((LinkedHashMap) ((Map.Entry) ((LinkedHashMap) nightWindData).entrySet().toArray()[1]).getValue()).entrySet().toArray()[1]).getValue().toString();
@@ -67,7 +68,7 @@ public class AcuuWeather1Day {
     @Override
     public String toString() {
         return cityID != 0 ?
-                new StringBuilder("Aktualne dane pogodowe dla miasta" + cityName)
+                new StringBuilder("Aktualne dane pogodowe dla miasta " + URLDecoder.decode(cityName))
                         .append(": \n")
                         .append("Temperatura minimalna " + minimalTemperature + " °C, maksymalna " + maximumTemperature + " °C. \n")
                         .append("Wiatr podczas dnia: " + windSpeedDay + " km/h, kierunek: " + windDirectionDay + ". \n")
