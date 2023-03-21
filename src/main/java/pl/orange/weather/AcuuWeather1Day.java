@@ -40,28 +40,32 @@ public class AcuuWeather1Day {
 
     private void getTemperatureData() {
         var forecast = ((ArrayList<?>) acuuWeatherData.getApiData().get("DailyForecasts")).get(0);
-        var temperature = ((LinkedHashMap) forecast).entrySet().toArray()[4];
+        var temperature = ((LinkedHashMap) forecast).get("Temperature");
         temperature = ((Map.Entry) temperature).getValue();
-        var minimumTemperatureData = ((Map.Entry) ((LinkedHashMap) temperature).entrySet().toArray()[0]).getValue();
-        minimalTemperature = (double) ((Map.Entry) ((LinkedHashMap) minimumTemperatureData).entrySet().toArray()[0]).getValue();
+        var minimumTemperatureData = ((LinkedHashMap) temperature).get("Minimum");
+        minimalTemperature = (double) ((LinkedHashMap) minimumTemperatureData).get("Value");
 
-        var maximumTemperatureData = ((Map.Entry) ((LinkedHashMap) temperature).entrySet().toArray()[1]).getValue();
-        maximumTemperature = (double) ((Map.Entry) ((LinkedHashMap) maximumTemperatureData).entrySet().toArray()[0]).getValue();
+        var maximumTemperatureData = ((LinkedHashMap) temperature).get("Maximum");
+        maximumTemperature = (double) ((LinkedHashMap) maximumTemperatureData).get("Value");
 
     }
 
     private void getWindData() {
         var forecast = ((ArrayList<?>) acuuWeatherData.getApiData().get("DailyForecasts")).get(0);
-        var dayData = ((Map.Entry) ((LinkedHashMap) forecast).entrySet().toArray()[10]).getValue();
-        var dayWindData = ((Map.Entry) ((LinkedHashMap) dayData).entrySet().toArray()[12]).getValue();
-        windSpeedDay = (double) ((Map.Entry) ((LinkedHashMap) ((Map.Entry) ((LinkedHashMap) dayWindData).entrySet().toArray()[0]).getValue()).entrySet().toArray()[0]).getValue();
-        windDirectionDay = ((Map.Entry) ((LinkedHashMap) ((Map.Entry) ((LinkedHashMap) dayWindData).entrySet().toArray()[1]).getValue()).entrySet().toArray()[1]).getValue().toString();
 
-        var nightData = ((Map.Entry) ((LinkedHashMap) forecast).entrySet().toArray()[11]).getValue();
-        var nightWindData = ((Map.Entry) ((LinkedHashMap) nightData).entrySet().toArray()[12]).getValue();
+        var dayData = ((LinkedHashMap) forecast).get("Day");
+        var dayWindData = ((LinkedHashMap) dayData).get("Wind");
+        var windSpeedData = ((LinkedHashMap) dayWindData).get("Speed");
+        windSpeedDay = (double) ((LinkedHashMap) windSpeedData).get("Value");
+        var windDirectionDayData = ((LinkedHashMap) dayWindData).get("Direction");
+        windDirectionDay = ((LinkedHashMap) windDirectionDayData).get("Localized").toString();
 
-        windSpeedNight = (double) ((Map.Entry) ((LinkedHashMap) ((Map.Entry) ((LinkedHashMap) nightWindData).entrySet().toArray()[0]).getValue()).entrySet().toArray()[0]).getValue();
-        windDirectionNight = ((Map.Entry) ((LinkedHashMap) ((Map.Entry) ((LinkedHashMap) nightWindData).entrySet().toArray()[1]).getValue()).entrySet().toArray()[1]).getValue().toString();
+        var nightData = ((LinkedHashMap) forecast).get("Night");
+        var nightWindData = ((LinkedHashMap) nightData).get("Wind");
+        var nightSpeedData = ((LinkedHashMap) nightWindData).get("Speed");
+        windSpeedNight = (double) ((LinkedHashMap) nightSpeedData).get("Value");
+        var windDirectionNightData = ((LinkedHashMap) dayWindData).get("Direction");
+        windDirectionNight = ((LinkedHashMap) windDirectionNightData).get("Localized").toString();
     }
 
 
