@@ -5,6 +5,7 @@ import pl.orange.model.CityDAO;
 import pl.orange.weather.AccuCitySearch;
 import pl.orange.weather.AcuuWeather1Day;
 
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Scanner;
 
@@ -55,7 +56,7 @@ public class Menu {
         separator();
         System.out.println("Miasta z bazy danych: ......................");
         CityDAO cityDAO = new CityDAO();
-        cityDAO.findAll().forEach(city -> System.out.println("Nazwa: " + city.getName() + ", klucz: " + city.getCityKey()));
+        cityDAO.findAll().forEach(city -> System.out.println("Nazwa: " + URLEncoder.encode(city.getName()) + ", klucz: " + city.getCityKey()));
         separator();
         initMenu();
     }
