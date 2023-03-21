@@ -37,7 +37,19 @@ public class CityDAO implements DataAccess<City,Long> {
     }
 
     @Override
-    public void deleteByID(Long aLong) {
+    public void deleteByID(Long id) {
+        Transaction transaction = null;
+        try (Session session =HibernateUtil.getFactory().openSession()) {
+            City cityToRemove = session.get(City.class,id);
+            transaction = session.beginTransaction();
+            session.remove(cityToRemove);
+            transaction.commit();
+        }catch (Exception e){
+            if (transaction != null){
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
 
     }
 }

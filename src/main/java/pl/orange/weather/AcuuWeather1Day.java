@@ -4,6 +4,8 @@ import org.apache.log4j.Logger;
 
 
 import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 
@@ -41,7 +43,6 @@ public class AcuuWeather1Day {
     private void getTemperatureData() {
         var forecast = ((ArrayList<?>) acuuWeatherData.getApiData().get("DailyForecasts")).get(0);
         var temperature = ((LinkedHashMap) forecast).get("Temperature");
-        temperature = ((Map.Entry) temperature).getValue();
         var minimumTemperatureData = ((LinkedHashMap) temperature).get("Minimum");
         minimalTemperature = (double) ((LinkedHashMap) minimumTemperatureData).get("Value");
 
@@ -72,7 +73,7 @@ public class AcuuWeather1Day {
     @Override
     public String toString() {
         return cityID != 0 ?
-                new StringBuilder("Aktualne dane pogodowe dla miasta " + URLDecoder.decode(cityName))
+                new StringBuilder("Aktualne dane pogodowe dla miasta " + URLDecoder.decode(cityName, StandardCharsets.UTF_8))
                         .append(": \n")
                         .append("Temperatura minimalna " + minimalTemperature + " °C, maksymalna " + maximumTemperature + " °C. \n")
                         .append("Wiatr podczas dnia: " + windSpeedDay + " km/h, kierunek: " + windDirectionDay + ". \n")
