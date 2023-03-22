@@ -10,8 +10,8 @@ import java.net.URLDecoder;
 public class Weather {
 
     private City city;
-    private Data minimalTemperature;
-    private Data maximumTemperature;
+    private double minimalTemperature;
+    private double maximumTemperature;
     private Wind windDay;
     private Wind windNight;
 
@@ -21,8 +21,6 @@ public class Weather {
 
     public Weather(City city){
         this.city = city;
-        minimalTemperature = new Data();
-        maximumTemperature = new Data();
         windDay = new Wind();
         windNight = new Wind();
 
@@ -32,18 +30,16 @@ public class Weather {
     public String toString() {
         return new StringBuilder("Aktualne dane pogodowe dla miasta " + URLDecoder.decode(city.getName()))
                 .append("\nTemperatura minimalna ")
-                .append(minimalTemperature.getValue() + " ")
-                .append(minimalTemperature.getUnity() + ", ")
-                .append(minimalTemperature.getValue() + " ")
-                .append(minimalTemperature.getUnity() + ", ")
+                .append(minimalTemperature + "°C, maksymalna ")
+                .append(maximumTemperature + "°C.")
                 .append("\nWiatr podczas dnia: ")
-                .append(windDay.getSpeed().getValue() + windDay.getSpeed().getUnity() + ", ")
+                .append(windDay.getSpeed()  + "km/h, ")
                 .append("kierunek: ")
-                .append( windDay.direction.getUnity() + ".")
+                .append( windDay.direction + ".")
                 .append("\nWiatr w nocy: ")
-                .append(windNight.getSpeed().getValue() + windNight.getSpeed().getUnity() + ", ")
+                .append(windNight.getSpeed() + "km/h, ")
                 .append("kierunek: ")
-                .append( windNight.direction.getUnity() + ".")
+                .append( windNight.direction + ".")
                 .toString();
     }
 }

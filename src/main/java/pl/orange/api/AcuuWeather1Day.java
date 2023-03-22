@@ -18,24 +18,14 @@ public class AcuuWeather1Day {
     private WeatherDataDeserialization acuuWeatherData;
     private final String apiKey1 = "dQHpG5soGU4z6IGMbSYdA7UQVA9JySmR";
     private final String apiKey2 = "mn4i7Pi5bymsiuqfhiBbXL2BCJbl43MC";
-    private final String cityName;
-    private final int cityCode;
-    private double minimalTemperature;
-    private double maximumTemperature;
-    private double windSpeedDay;
-    private String windDirectionDay;
-    private double windSpeedNight;
-    private String windDirectionNight;
     private Weather weather;
 
     public AcuuWeather1Day(City city) {
-        this.cityCode = city.getCityKey();
-        this.cityName = city.getName();
         weather = new Weather(city);
-        if (this.cityCode != 0) {
+        if (weather.getCity().getCityKey() != 0) {
             acuuWeatherData = new WeatherDataDeserialization(
                     new WeatherApiReader("http://dataservice.accuweather.com/forecasts/v1/daily/1day/"
-                            + this.cityCode + "?apikey= " + apiKey2 + "&language=pl&details=true&metric=true"));
+                            + weather.getCity().getCityKey() + "?apikey= " + apiKey2 + "&language=pl&details=true&metric=true"));
             getTemperatureData();
             getWindData();
         } else {
@@ -49,13 +39,11 @@ public class AcuuWeather1Day {
         var forecast = ((ArrayList<?>) acuuWeatherData.getApiData().get("DailyForecasts")).get(0);
         var temperature = ((LinkedHashMap) forecast).get("Temperature");
         var minimumTemperatureData = ((LinkedHashMap) temperature).get("Minimum");
-        minimalTemperature = (double) ((LinkedHashMap) minimumTemperatureData).get("Value");
-        weather.getMinimalTemperature().setValue(minimalTemperature);
-        weather.getMinimalTemperature().setUnity((String) (((LinkedHashMap<?, ?>) minimumTemperatureData).get("Unity")));
+        weather.setMinimalTemperature( (double) ((LinkedHashMap) minimumTemperatureData).get("Value") );
+
         var maximumTemperatureData = ((LinkedHashMap) temperature).get("Maximum");
-        maximumTemperature = (double) ((LinkedHashMap) maximumTemperatureData).get("Value");
-        weather.getMaximumTemperature().setValue(maximumTemperature);
-        weather.getMaximumTemperature().setUnity((String) (((LinkedHashMap<?, ?>) maximumTemperatureData).get("Unity")));
+        weather.setMaximumTemperature((double) ((LinkedHashMap) maximumTemperatureData).get("Value"));
+
 
     }
 
@@ -65,22 +53,18 @@ public class AcuuWeather1Day {
         var dayData = ((LinkedHashMap) forecast).get("Day");
         var dayWindData = ((LinkedHashMap) dayData).get("Wind");
         var windSpeedData = ((LinkedHashMap) dayWindData).get("Speed");
-        windSpeedDay = (double) ((LinkedHashMap) windSpeedData).get("Value");
-        weather.getWindDay().getSpeed().setValue(windSpeedDay);
-        weather.getWindDay().getSpeed().setUnity((String) ((LinkedHashMap<?, ?>) windSpeedData).get("Unity"));
+        weather.getWindDay().setSpeed((double) ((LinkedHashMap) windSpeedData).get("Value"));
+
         var windDirectionDayData = ((LinkedHashMap) dayWindData).get("Direction");
-        windDirectionDay = (((LinkedHashMap) windDirectionDayData).get("Localized")).toString();
-        weather.getWindDay().getDirection().setUnity(windDirectionDay);
+        weather.getWindDay().setDirection((((LinkedHashMap) windDirectionDayData).get("Localized")).toString());
 
         var nightData = ((LinkedHashMap) forecast).get("Night");
         var nightWindData = ((LinkedHashMap) nightData).get("Wind");
         var nightSpeedData = ((LinkedHashMap) nightWindData).get("Speed");
-        windSpeedNight = (double) ((LinkedHashMap) nightSpeedData).get("Value");
-        weather.getWindNight().getSpeed().setValue(windSpeedNight);
-        weather.getWindNight().getSpeed().setUnity((String) ((LinkedHashMap<?, ?>) nightSpeedData).get("Unity"));
+        weather.getWindNight().setSpeed((double) ((LinkedHashMap) nightSpeedData).get("Value"));
+
         var windDirectionNightData = ((LinkedHashMap) dayWindData).get("Direction");
-        windDirectionNight = (((LinkedHashMap) windDirectionNightData).get("Localized")).toString();
-        weather.getWindNight().getDirection().setUnity(windDirectionNight);
+        weather.getWindNight().setDirection((((LinkedHashMap) windDirectionNightData).get("Localized")).toString());
     }
 
 

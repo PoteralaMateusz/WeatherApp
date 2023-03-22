@@ -4,12 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
+@Setter
 public class Wind {
-    Data speed;
-    Data direction;
+    double speed;
+    String direction;
 
     public Wind() {
-        this.speed = new Data();
-        this.direction = new Data();
     }
 }
