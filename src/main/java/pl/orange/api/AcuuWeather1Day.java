@@ -1,10 +1,9 @@
-package pl.orange.weather;
+package pl.orange.api;
 
 import org.apache.log4j.Logger;
 
 
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 

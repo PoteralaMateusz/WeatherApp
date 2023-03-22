@@ -1,4 +1,4 @@
-package pl.orange.weather;
+package pl.orange.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;

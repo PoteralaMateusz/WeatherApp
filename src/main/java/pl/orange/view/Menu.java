@@ -2,11 +2,10 @@ package pl.orange.view;
 
 import pl.orange.model.City;
 import pl.orange.model.CityDAO;
-import pl.orange.weather.AccuCitySearch;
-import pl.orange.weather.AcuuWeather1Day;
+import pl.orange.api.AccuCitySearch;
+import pl.orange.api.AcuuWeather1Day;
 
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
