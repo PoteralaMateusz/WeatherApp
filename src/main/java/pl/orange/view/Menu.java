@@ -58,7 +58,7 @@ public class Menu {
         List<City> cityList = cityDAO.findAll();
 
         for (City city: cityList) {
-            AcuuWeather1Day acuuWeather1Day = new AcuuWeather1Day(city.getName(),city.getCityKey());
+            AcuuWeather1Day acuuWeather1Day = new AcuuWeather1Day(city);
             System.out.println(acuuWeather1Day);
             separator();
         }
