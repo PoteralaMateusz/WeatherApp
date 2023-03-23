@@ -2,12 +2,9 @@ package pl.orange.api;
 
 import org.apache.log4j.Logger;
 import pl.orange.model.City;
-import pl.orange.model.Data;
 import pl.orange.model.Weather;
 
 
-import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 
@@ -16,8 +13,7 @@ public class AcuuWeather1Day {
     private final static Logger LOGGER = Logger.getLogger(AcuuWeather1Day.class);
 
     private WeatherDataDeserialization acuuWeatherData;
-    private final String apiKey1 = "dQHpG5soGU4z6IGMbSYdA7UQVA9JySmR";
-    private final String apiKey2 = "mn4i7Pi5bymsiuqfhiBbXL2BCJbl43MC";
+    private final String apiKey = "mn4i7Pi5bymsiuqfhiBbXL2BCJbl43MC";
     private Weather weather;
 
     public AcuuWeather1Day(City city) {
@@ -25,7 +21,7 @@ public class AcuuWeather1Day {
         if (!weather.getCity().getCityKey().contains("0")) {
             acuuWeatherData = new WeatherDataDeserialization(
                     new WeatherApiReader("http://dataservice.accuweather.com/forecasts/v1/daily/1day/"
-                            + weather.getCity().getCityKey() + "?apikey= " + apiKey2 + "&language=pl&details=true&metric=true"));
+                            + weather.getCity().getCityKey() + "?apikey= " + apiKey + "&language=pl&details=true&metric=true"));
             getTemperatureData();
             getWindData();
         } else {
