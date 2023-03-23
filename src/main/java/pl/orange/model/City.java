@@ -17,9 +17,9 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private int cityKey;
+    private String cityKey;
 
-    public City(String name, int cityKey) {
+    public City(String name, String cityKey) {
         this.name = name;
         this.cityKey = cityKey;
     }

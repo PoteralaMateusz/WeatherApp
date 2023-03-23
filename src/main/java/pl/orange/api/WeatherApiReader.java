@@ -29,6 +29,10 @@ public class WeatherApiReader {
         return responseCode;
     }
 
+    public void setResponseData(StringBuffer responseData){
+        this.responseData = responseData;
+    }
+
 
     private void readDataToString() {
 

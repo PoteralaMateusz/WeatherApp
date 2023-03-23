@@ -22,7 +22,7 @@ public class AcuuWeather1Day {
 
     public AcuuWeather1Day(City city) {
         weather = new Weather(city);
-        if (weather.getCity().getCityKey() != 0) {
+        if (!weather.getCity().getCityKey().contains("0")) {
             acuuWeatherData = new WeatherDataDeserialization(
                     new WeatherApiReader("http://dataservice.accuweather.com/forecasts/v1/daily/1day/"
                             + weather.getCity().getCityKey() + "?apikey= " + apiKey2 + "&language=pl&details=true&metric=true"));

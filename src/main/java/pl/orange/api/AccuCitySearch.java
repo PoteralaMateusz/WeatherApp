@@ -5,6 +5,8 @@ import org.apache.log4j.Logger;
 import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class AccuCitySearch {
 
@@ -15,7 +17,7 @@ public class AccuCitySearch {
     private final String apiKey1 = "dQHpG5soGU4z6IGMbSYdA7UQVA9JySmR";
     private final String apiKey2 = "mn4i7Pi5bymsiuqfhiBbXL2BCJbl43MC";
     private String cityName;
-    private int cityKey;
+    private String cityKey;
     public boolean cityExist;
 
     public AccuCitySearch(String city) {
@@ -25,7 +27,7 @@ public class AccuCitySearch {
         cityExisting();
     }
 
-    public int cityKey(){
+    public String cityKey(){
         return cityKey;
     }
 
@@ -41,19 +43,16 @@ public class AccuCitySearch {
         }else
         {
             cityExist = false;
-            cityKey = 0;
+            cityKey = "0";
             LOGGER.warn("City: " + URLEncoder.encode(cityName) + " don't exist in weather API");
         }
     }
 
     private void getCityKey(){
-        if (apiData.responseCode() == HttpURLConnection.HTTP_OK) {
-            String data = apiData.responseData().toString();
-            int keyStartIndex = data.indexOf("Key") + 6;
-            int keyEndIndex = keyStartIndex + (data.substring(keyStartIndex)).indexOf(",") - 1;
-            cityKey = Integer.parseInt(data.substring(keyStartIndex, keyEndIndex));
-        }
-
+        apiData.setResponseData( new StringBuffer("{\"City\":" + apiData.responseData() + "}"));
+        WeatherDataDeserialization dataDeserialization = new WeatherDataDeserialization(apiData);
+        var cityData = ((ArrayList<?>)dataDeserialization.apiData.get("City")).get(0);
+        cityKey = ((LinkedHashMap) cityData).get("Key").toString();
 
     }
 }
