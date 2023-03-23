@@ -52,4 +52,22 @@ public class CityDAO implements DataAccess<City,Long> {
         }
 
     }
+
+    @Override
+    public void deleteByName(City city) {
+        Transaction transaction = null;
+        try (Session session =HibernateUtil.getFactory().openSession()) {
+            transaction = session.beginTransaction();
+            List<City> cityToRemove = session.createQuery("from City where name='" + city.getName() +"'" , City.class).getResultList();
+            for (City cityFromDB : cityToRemove){
+                session.remove(cityFromDB);
+            }
+            transaction.commit();
+        }catch (Exception e){
+            if (transaction != null){
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+    }
 }

@@ -6,6 +6,6 @@ public interface DataAccess <E,ID>{
 
     void save(E entity);
     List<E> findAll();
-
     void deleteByID(ID id);
+    void deleteByName(E entity);
 }

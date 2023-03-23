@@ -8,6 +8,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -23,4 +26,9 @@ public class City {
         this.name = name;
         this.cityKey = cityKey;
     }
+
+    public City(String name) {
+        this.name = URLEncoder.encode(name, StandardCharsets.UTF_8);
+    }
+
 }
