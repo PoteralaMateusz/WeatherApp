@@ -30,9 +30,9 @@ public class Menu {
             System.out.println("Podaj twój wybór: ...........................");
             Scanner scanner = new Scanner(System.in);
             type = scanner.nextInt();
-        }while (type != 1 && type != 2 && type != 3 && type != 4 && type != 5 && type != 0 );
+        } while (type != 1 && type != 2 && type != 3 && type != 4 && type != 5 && type != 0);
 
-        switch (type){
+        switch (type) {
 
             case 1 -> addCity();
             case 2 -> removeCityByIDFromDB();
@@ -70,7 +70,7 @@ public class Menu {
         CityDAO cityDAO = new CityDAO();
         List<City> cityList = cityDAO.findAll();
 
-        for (City city: cityList) {
+        for (City city : cityList) {
             AcuuWeather1Day acuuWeather1Day = new AcuuWeather1Day(city);
             System.out.println(acuuWeather1Day);
             separator();
@@ -96,7 +96,7 @@ public class Menu {
 
         AccuCitySearch newCityToSave = new AccuCitySearch(cityName);
 
-        if (newCityToSave.cityExist){
+        if (newCityToSave.cityExist) {
             CityDAO cityDAO = new CityDAO();
             cityDAO.save(new City(newCityToSave.cityName(), newCityToSave.cityKey()));
         }
@@ -105,7 +105,7 @@ public class Menu {
     }
 
 
-    private void separator(){
+    private void separator() {
         System.out.println("=============================================");
 
     }

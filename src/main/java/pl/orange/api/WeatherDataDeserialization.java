@@ -30,10 +30,10 @@ public class WeatherDataDeserialization {
     private void getData() {
         mapper = new ObjectMapper();
         try {
-            apiData = mapper.readValue(apiReader.responseData().toString(), new TypeReference<>() {
-            });
+            apiData = mapper.readValue(apiReader.responseData().toString(), new TypeReference<>() {});
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            LOGGER.error("JSON DESERIALIZATION ERROR");
+            e.printStackTrace();
         }
 
     }

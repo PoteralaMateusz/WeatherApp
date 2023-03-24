@@ -15,11 +15,11 @@ public class Weather {
     private Wind windDay;
     private Wind windNight;
 
-    public Weather(){
+    public Weather() {
 
     }
 
-    public Weather(City city){
+    public Weather(City city) {
         this.city = city;
         windDay = new Wind();
         windNight = new Wind();
@@ -33,13 +33,13 @@ public class Weather {
                 .append(minimalTemperature + "°C, maksymalna ")
                 .append(maximumTemperature + "°C.")
                 .append("\nWiatr podczas dnia: ")
-                .append(windDay.getSpeed()  + "km/h, ")
+                .append(windDay.getSpeed() + "km/h, ")
                 .append("kierunek: ")
-                .append( windDay.direction + ".")
+                .append(windDay.direction + ".")
                 .append("\nWiatr w nocy: ")
                 .append(windNight.getSpeed() + "km/h, ")
                 .append("kierunek: ")
-                .append( windNight.direction + ".")
+                .append(windNight.direction + ".")
                 .toString();
     }
 }

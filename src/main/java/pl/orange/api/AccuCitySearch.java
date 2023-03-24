@@ -3,7 +3,6 @@ package pl.orange.api;
 import org.apache.log4j.Logger;
 import pl.orange.model.City;
 
-import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -26,11 +25,11 @@ public class AccuCitySearch {
         cityExisting();
     }
 
-    public String cityName(){
+    public String cityName() {
         return city.getName();
     }
 
-    public String cityKey(){
+    public String cityKey() {
         return city.getCityKey();
     }
 

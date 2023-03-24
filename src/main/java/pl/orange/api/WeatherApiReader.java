@@ -16,7 +16,7 @@ public class WeatherApiReader {
     private StringBuffer responseData = new StringBuffer();
     private int responseCode;
 
-    public WeatherApiReader(String GET_URL){
+    public WeatherApiReader(String GET_URL) {
         this.GET_URL = GET_URL;
         readDataToString();
     }
@@ -25,11 +25,11 @@ public class WeatherApiReader {
         return responseData;
     }
 
-    public int responseCode(){
+    public int responseCode() {
         return responseCode;
     }
 
-    public void setResponseData(StringBuffer responseData){
+    public void setResponseData(StringBuffer responseData) {
         this.responseData = responseData;
     }
 

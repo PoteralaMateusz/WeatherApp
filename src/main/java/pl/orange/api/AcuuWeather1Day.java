@@ -36,7 +36,7 @@ public class AcuuWeather1Day {
         var forecast = ((ArrayList<?>) acuuWeatherData.getApiData().get("DailyForecasts")).get(0);
         var temperature = ((LinkedHashMap) forecast).get("Temperature");
         var minimumTemperatureData = ((LinkedHashMap) temperature).get("Minimum");
-        weather.setMinimalTemperature( (double) ((LinkedHashMap) minimumTemperatureData).get("Value") );
+        weather.setMinimalTemperature((double) ((LinkedHashMap) minimumTemperatureData).get("Value"));
 
         var maximumTemperatureData = ((LinkedHashMap) temperature).get("Maximum");
         weather.setMaximumTemperature((double) ((LinkedHashMap) maximumTemperatureData).get("Value"));
@@ -67,14 +67,8 @@ public class AcuuWeather1Day {
 
     @Override
     public String toString() {
-//        return cityCode != 0 ?
-//                new StringBuilder("Aktualne dane pogodowe dla miasta " + URLDecoder.decode(cityName, StandardCharsets.UTF_8))
-//                        .append(": \n")
-//                        .append("Temperatura minimalna " + minimalTemperature + " °C, maksymalna " + maximumTemperature + " °C. \n")
-//                        .append("Wiatr podczas dnia: " + windSpeedDay + " km/h, kierunek: " + windDirectionDay + ". \n")
-//                        .append("Wiatr w nocy: " + windSpeedNight + " km/h, kierunek: " + windDirectionNight + ". \n")
-//                        .toString() :
-//                "Brak wczytanych danych";
-        return weather.toString();
+        return weather.getCity().getCityKey().equals("0") ?
+                "Brak wczytanych danych" :
+                weather.toString();
     }
 }
