@@ -18,14 +18,15 @@ public class AcuuWeather1Day {
 
     public AcuuWeather1Day(City city) {
         weather = new Weather(city);
-        if (!weather.getCity().getCityKey().contains("0")) {
+        String cityKey = weather.getCity().getCityKey();
+        if (!cityKey.equals("0")) {
             acuuWeatherData = new WeatherDataDeserialization(
                     new WeatherApiReader("http://dataservice.accuweather.com/forecasts/v1/daily/1day/"
                             + weather.getCity().getCityKey() + "?apikey= " + apiKey + "&language=pl&details=true&metric=true"));
             getTemperatureData();
             getWindData();
         } else {
-            LOGGER.warn("API CONNECTION ERROR OR CITY DON'T EXIST");
+            LOGGER.warn("CITY KEY PROBLEM");
         }
 
     }
