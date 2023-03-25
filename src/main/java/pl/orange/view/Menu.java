@@ -3,7 +3,7 @@ package pl.orange.view;
 import pl.orange.model.City;
 import pl.orange.model.CityDAO;
 import pl.orange.api.AccuCitySearch;
-import pl.orange.api.AcuuWeather1Day;
+import pl.orange.api.AccuWeather1Day;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -71,8 +71,8 @@ public class Menu {
         List<City> cityList = cityDAO.findAll();
 
         for (City city : cityList) {
-            AcuuWeather1Day acuuWeather1Day = new AcuuWeather1Day(city);
-            System.out.println(acuuWeather1Day);
+            AccuWeather1Day accuWeather1Day = new AccuWeather1Day(city);
+            System.out.println(accuWeather1Day);
             separator();
         }
         separator();

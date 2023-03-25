@@ -8,15 +8,15 @@ import pl.orange.model.Weather;
 import java.util.*;
 
 
-public class AcuuWeather1Day {
+public class AccuWeather1Day {
 
-    private final static Logger LOGGER = Logger.getLogger(AcuuWeather1Day.class);
+    private final static Logger LOGGER = Logger.getLogger(AccuWeather1Day.class);
 
     private WeatherDataDeserialization acuuWeatherData;
     private final String apiKey = "mn4i7Pi5bymsiuqfhiBbXL2BCJbl43MC";
     private Weather weather;
 
-    public AcuuWeather1Day(City city) {
+    public AccuWeather1Day(City city) {
         weather = new Weather(city);
         String cityKey = weather.getCity().getCityKey();
         if (!cityKey.equals("0")) {
