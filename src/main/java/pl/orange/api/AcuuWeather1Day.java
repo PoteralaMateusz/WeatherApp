@@ -25,6 +25,8 @@ public class AcuuWeather1Day {
                             + weather.getCity().getCityKey() + "?apikey= " + apiKey + "&language=pl&details=true&metric=true"));
             getTemperatureData();
             getWindData();
+            getDescription();
+            getPrecipitationProbability();
         } else {
             LOGGER.warn("CITY KEY PROBLEM");
         }
@@ -50,18 +52,36 @@ public class AcuuWeather1Day {
         var dayData = ((LinkedHashMap) forecast).get("Day");
         var dayWindData = ((LinkedHashMap) dayData).get("Wind");
         var windSpeedData = ((LinkedHashMap) dayWindData).get("Speed");
-        weather.getWindDay().setSpeed((double) ((LinkedHashMap) windSpeedData).get("Value"));
+        weather.getDay().setSpeed((double) ((LinkedHashMap) windSpeedData).get("Value"));
 
         var windDirectionDayData = ((LinkedHashMap) dayWindData).get("Direction");
-        weather.getWindDay().setDirection((((LinkedHashMap) windDirectionDayData).get("Localized")).toString());
+        weather.getDay().setDirection((((LinkedHashMap) windDirectionDayData).get("Localized")).toString());
 
         var nightData = ((LinkedHashMap) forecast).get("Night");
         var nightWindData = ((LinkedHashMap) nightData).get("Wind");
         var nightSpeedData = ((LinkedHashMap) nightWindData).get("Speed");
-        weather.getWindNight().setSpeed((double) ((LinkedHashMap) nightSpeedData).get("Value"));
+        weather.getNight().setSpeed((double) ((LinkedHashMap) nightSpeedData).get("Value"));
 
         var windDirectionNightData = ((LinkedHashMap) dayWindData).get("Direction");
-        weather.getWindNight().setDirection((((LinkedHashMap) windDirectionNightData).get("Localized")).toString());
+        weather.getNight().setDirection((((LinkedHashMap) windDirectionNightData).get("Localized")).toString());
+    }
+
+    private void getDescription(){
+        var forecast = ((ArrayList<?>) acuuWeatherData.getApiData().get("DailyForecasts")).get(0);
+        var dayData = ((LinkedHashMap) forecast).get("Day");
+        weather.getDay().setDescription(((LinkedHashMap)dayData).get("LongPhrase").toString());
+
+        var nightData = ((LinkedHashMap) forecast).get("Night");
+        weather.getNight().setDescription(((LinkedHashMap)nightData).get("LongPhrase").toString());
+    }
+
+    private void getPrecipitationProbability(){
+        var forecast = ((ArrayList<?>) acuuWeatherData.getApiData().get("DailyForecasts")).get(0);
+        var dayData = ((LinkedHashMap) forecast).get("Day");
+        weather.getDay().setPrecipitationProbability((int) ((LinkedHashMap)dayData).get("PrecipitationProbability"));
+
+        var nightData = ((LinkedHashMap) forecast).get("Night");
+        weather.getNight().setPrecipitationProbability((int) ((LinkedHashMap)nightData).get("PrecipitationProbability"));
     }
 
 

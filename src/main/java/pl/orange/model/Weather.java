@@ -12,8 +12,8 @@ public class Weather {
     private City city;
     private double minimalTemperature;
     private double maximumTemperature;
-    private Wind windDay;
-    private Wind windNight;
+    private PartialData day;
+    private PartialData night;
 
     public Weather() {
 
@@ -21,8 +21,8 @@ public class Weather {
 
     public Weather(City city) {
         this.city = city;
-        windDay = new Wind();
-        windNight = new Wind();
+        day = new PartialData();
+        night = new PartialData();
 
     }
 
@@ -32,14 +32,18 @@ public class Weather {
                 .append("\nTemperatura minimalna ")
                 .append(minimalTemperature + "°C, maksymalna ")
                 .append(maximumTemperature + "°C.")
-                .append("\nWiatr podczas dnia: ")
-                .append(windDay.getSpeed() + "km/h, ")
+                .append("\nDzień: " + day.getDescription() + ".")
+                .append("\nPrawdopodobieństwo opadów: " + day.getPrecipitationProbability() + "%.")
+                .append("\nWiatr: ")
+                .append(day.getSpeed() + "km/h, ")
                 .append("kierunek: ")
-                .append(windDay.direction + ".")
-                .append("\nWiatr w nocy: ")
-                .append(windNight.getSpeed() + "km/h, ")
+                .append(day.getDirection() + ".")
+                .append("\nNoc: " + night.getDescription() + ".")
+                .append("\nPrawdopodobieństwo opadów: " + night.getPrecipitationProbability() + "%.")
+                .append("\nWiatr: ")
+                .append(night.getSpeed() + "km/h, ")
                 .append("kierunek: ")
-                .append(windNight.direction + ".")
+                .append(night.getDirection() + ".")
                 .toString();
     }
 }
